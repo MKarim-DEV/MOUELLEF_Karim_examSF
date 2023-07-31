@@ -21,6 +21,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\Validator\Constraints\Choice;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -109,26 +110,37 @@ class UserType extends AbstractType
                 ],
                 'label' => 'Type de contrat',
                 'choices' => [
-                    'CDD' => 'cdd',
-                    'CDI' => 'cdi',
-                    'Interim' => 'interim',
+                    'CDD' => 'CDD',
+                    'CDI' => 'CDI',
+                    'Interim' => 'INTERIM',
                 ],
-                'mapped' => false,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez sélectionner un type de contrat.',
+                    new Choice([
+                        'choices' => ['CDI', 'CDD', 'INTERIM'],
+                        'message' => 'Veuillez sélectionner un contrat valide.',
                     ]),
                 ],
             ])
             ->add('end_date', DateType::class, [
-                // "attr" => [
-                //     "class" => "form-control" . ($options['data']->getContract() === 'cdd' || $options['data']->getContract() === 'interim' ? '' : 'd-none'),
-                //     "id" => "end_date"
-                // ],
-                'label' => 'Date de fin de contrat (Jour/Mois/Année)',
+                 "attr" => [
+                    "class" => "form-control",
+                     "id" => "end_date"
+                 ],
+                'label' => 'Date de fin de contrat',
                 'required' => false,
                 'format' => 'dd-MM-yyyy',
             ]);
+            $builder->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+                $user = $event->getData();
+                $form = $event->getForm();
+                if (isset($user['contract']) && in_array($user['contract'], ['CDD', 'INTERIM'])) {
+                    $form->add('end_date', DateType::class, [
+                        'label' => 'Date de fin de contrat',
+                        'required' => false,
+                        'format' => 'dd-MM-yyyy'
+                    ]);
+                };
+            });
     }
 
     public function configureOptions(OptionsResolver $resolver): void
