@@ -14,30 +14,54 @@ class UserFixtures extends Fixture
     }
     public function load(ObjectManager $manager): void
     {
-        // for($i = 0; $i < 20; $i++){
+        $divisions = ["RH", "Comptabilité", "Informatique", "Direction"];
+        $contracts = ["CDI", "CDD", "INTERIM"];
+        for($i = 0; $i < 20; $i++){
 
-        //     $user = new User();
-        //     $user->setEmail("email" . $i. "@gmail.com");
-        //     $encodedPassword=$this->hasher->hashPassword($user, "user");
-        //     $user->setPassword($encodedPassword);
-        //     $user->setRoles(["ROLE_USER"]);
-        //     $manager->persist($user);
-        // }
+            $user = new User();
+            $user->setEmail("user" . $i. "@gmail.com");
+            $encodedPassword=$this->hasher->hashPassword($user, "password".$i);
+            $user->setPassword($encodedPassword);
+            $user->setRoles(["ROLE_USER"]);
+                $user->setName("name".$i);
+                $user->setFirstname("firstname".$i);
+                $user->setPicture("img/profil.jpg"); // Utilisez le bon chemin vers le dossier public/img
+            $user->setDivision($divisions[array_rand($divisions)]);
+            $contract = $contracts[array_rand($contracts)];
+            $user->setContract($contract);
+            if ($contract === "CDD" || $contract === "INTERIM") {
+                $user->setEndDate($this->getRandomDate("2022-01-01", "2024-12-31"));
+            }
+            $manager->persist($user);
+        }
+        
 
-        $Admin= new User();
-        $Admin->setEmail("rh@humanbooster.com)");
-        $encodedPassword=$this->hasher->hashPassword($Admin, "rh123@");
-        $Admin->setPassword($encodedPassword);
-        $Admin->setRoles(["ROLE_RH"]);
-        $Admin->setName("");
-        $Admin->setFirstname("");
-        $Admin->setPicture("");
-        $Admin->setDivision("");
-        $Admin->setContract("");
+        $rh= new User();
+        $rh->setEmail("rh@humanbooster.com)");
+        $encodedPassword=$this->hasher->hashPassword($rh, "rh123@");
+        $rh->setPassword($encodedPassword);
+        $rh->setRoles(["ROLE_RH"]);
+        $rh->setName("");
+        $rh->setFirstname("");
+        $rh->setPicture("");
+        $rh->setDivision("");
+        $rh->setContract("");
 
-        $manager->persist($Admin);
+        $manager->persist($rh);
         $manager->flush();
 
     }
+    private function getRandomDate(string $startDate, string $endDate): \DateTimeInterface
+    {
+        $startDate = strtotime($startDate);
+        $endDate = strtotime($endDate);
+        $randomTimestamp = mt_rand($startDate, $endDate);
+
+        $randomDate = new \DateTime();
+        $randomDate->setTimestamp($randomTimestamp);
+
+        return $randomDate;
+    }
 }
+
 

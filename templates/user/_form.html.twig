@@ -1,38 +1,4 @@
-{{ form_start(form) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.firstname) }}
-    {{ form_row(form.picture) }}
-    {{ form_row(form.division) }}
-    <div id="contract">
-    {{ form_row(form.contract) }}
-    </div>
-    <div id="end_date" style="display: none;">
-    {{ form_row(form.end_date) }}
-    </div>
-    {{ form_end(form) }}
-<button class="btn">{{ button_label|default('Save') }}</button>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const contractField = document.querySelector('#{{ form.contract.vars.id }}');
-        const endDateField = document.querySelector('#end_date');
-
-        const display_end_date = function () {
-            if (contractField.value === 'CDI') {
-                endDateField.style.display = 'none';
-            } else {
-                endDateField.style.display = 'block';
-            }
-        };
-
-        display_end_date();
-
-        contractField.addEventListener('change', function () {
-            display_end_date();
-        });
-    });
-</script>
+((((((((((/))))))))))
 {# <script>
  document.addEventListener('DOMContentLoaded', function () {
     const contractField = document.querySelector('#contract');

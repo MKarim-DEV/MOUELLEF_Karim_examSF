@@ -97,10 +97,10 @@ class UserType extends AbstractType
                 ],
                 'label' => 'Secteur d\'activité',
                 'choices' => [
-                    'RH' => 'rh',
-                    'Informatique' => 'info',
-                    'Comptabilité' => 'compta',
-                    'Direction' => 'dir',
+                    'RH' => 'RH',
+                    'Informatique' => 'Informatique',
+                    'Comptabilité' => 'Comptabilité',
+                    'Direction' => 'Direction',
                 ]
             ])
             ->add('contract', ChoiceType::class, [
