@@ -1,11 +1,49 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}New User{% endblock %}
 
 {% block body %}
     <h1>Create new User</h1>
+    <div class="container">
 
     {{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('app_user_index') }}">back to list</a>
+    <a href="{{ path('app_user_index') }}">Retour à la liste des employés</a>
+    </div> 
+    {# <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        display_end_date();
+       document.querySelector("#contract").addEventListener("change", function() {
+            display_end_date();
+        });
+        function display_end_date() {
+            var contractValue = document.getElementById("contract").value;
+            var endDateField = document.getElementById("end_date");
+
+            if (contractValue === 'cdd' || contractValue === 'interim') {
+                endDateField.classList.remove('d-none');
+            } else {
+                endDateField.classList.add('d-none');
+            }
+        }
+    });
+
+    const contractField = document.querySelector('#contract');
+    const endDateField = document.querySelector('#end_date');
+    function display_end_date() {
+        const selectedContract = contractField.value;
+        if (selectedContract === 'CDD' || selectedContract === 'Interim') {
+            endDateField.classList.remove("d-none");
+    }else {
+                endDateField.classList.add('d-none');
+            }
+    }
+    display_end_date();
+
+    contractField.addEventListener('change', function() {
+        display_end_date();
+    });
+</script>   #}
 {% endblock %}
+

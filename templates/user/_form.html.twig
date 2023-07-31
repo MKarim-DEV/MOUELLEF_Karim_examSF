@@ -1,4 +1,11 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.firstname) }}
+    {{ form_row(form.picture) }}
+    {{ form_row(form.division) }}
+    {{ form_row(form.contract) }}
+{{ form_row(form.end_date, { 'attr': { 'class': form.contract.vars.value not in ['cdd', 'interim'] ? 'd-none' : 'form-control' } }) }}
+<button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -33,7 +33,7 @@
                 <td>{{ user.picture }}</td>
                 <td>{{ user.division }}</td>
                 <td>{{ user.contract }}</td>
-                <td>{{ user.endDate ? user.endDate|date('Y-m-d') : '' }}</td>
+                <td>{{ user.endDate ? user.endDate|date('d-m-Y') : '' }}</td>
                 <td>
                     <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
                     <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
