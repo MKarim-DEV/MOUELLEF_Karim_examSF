@@ -37,7 +37,7 @@ class UserFixtures extends Fixture
         
 
         $rh= new User();
-        $rh->setEmail("rh@humanbooster.com)");
+        $rh->setEmail("rh@humanbooster.com");
         $encodedPassword=$this->hasher->hashPassword($rh, "rh123@");
         $rh->setPassword($encodedPassword);
         $rh->setRoles(["ROLE_RH"]);
