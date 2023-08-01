@@ -1,15 +1,17 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}Nouvel employé{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+    <h1>Ajouter un nouvel employé</h1>
     <div class="container">
 
     {{ include('user/_form.html.twig') }}
 
-    <a href="{{ path('app_user_index') }}">Retour à la liste des employés</a>
+    <div class="d-flex justify-content-end">
+    <a href="{{ path('app_user_index') }}" class="btn btn-outline-success fs-4">Retour à la liste des employés</a>
+    </div>
     </div> 
 {% endblock %}
 

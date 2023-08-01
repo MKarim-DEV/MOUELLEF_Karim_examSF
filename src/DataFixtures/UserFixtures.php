@@ -25,7 +25,7 @@ class UserFixtures extends Fixture
             $user->setRoles(["ROLE_USER"]);
                 $user->setName("name".$i);
                 $user->setFirstname("firstname".$i);
-                $user->setPicture("img/profil.jpg"); // Utilisez le bon chemin vers le dossier public/img
+                $user->setPicture("uploads/pictures/profil.jpg"); // Utilisez le bon chemin vers le dossier public/img
             $user->setDivision($divisions[array_rand($divisions)]);
             $contract = $contracts[array_rand($contracts)];
             $user->setContract($contract);

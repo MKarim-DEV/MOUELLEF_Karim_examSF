@@ -13,6 +13,49 @@
         {% endblock %}
     </head>
     <body>
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-semibold" href="#">RH.com</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark" aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse show " id="navbarDark">
+      <ul class="navbar-nav me-auto  ms-5 mb-2 mt-3 mb-xl-0 ">
+        <li class="nav-item mx-5">
+          <a class="nav-link text-primary fw-semibold" aria-current="page" href="{{ path('app_user_index') }}">Liste des employés</a>
+        </li>
+        <li class="nav-item mx-5">
+        {% if app.user is not null and is_granted('ROLE_USER') and not is_granted('ROLE_RH') %}
+        <p class="text-light text-center fs-4 mx-5">Bienvenue
+			{{ app.user.firstname }}
+			{{app.user.name}}</p>
+        {% endif %}
+        {% if app.user is not null and is_granted('ROLE_RH') %} 
+        <p class="text-center text-light fs-4 mx-5">Bienvenue Mr/Mme RH</p>  
+        </li>
+        {% endif %}
+        {% if app.user is not null and is_granted('ROLE_RH') %} 
+        <a class="nav-link active text-danger fw-bold " href="{{ path('app_user_new') }}">Ajouter un employé</a>   
+        </li>
+        {% endif %}  
+         {% if app.user is null %}
+        <li class="nav-item mx-2">
+          <a class="nav-link fw-semibold" href="{{ path('app_login') }}">Connexion</a>
+        </li>
+        {% endif %}
+        {% if app.user is not null %}
+        <li class="nav-item mx-5">
+          <a class="nav-link fw-semibold" href="{{ path('app_logout') }}">Déconnexion</a>
+        </li>
+        {% endif %} 
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
         {% block body %}{% endblock %}
     </body>
 </html>
